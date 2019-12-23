@@ -31,8 +31,6 @@ public class MainActivity extends AppCompatActivity {
 
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    private NASAService nasaService;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,14 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 compositeDisposable.add(nasaViewModel.getImage(searchEditText.getText().toString())
                         .subscribe(images -> {
 
-//                            images = new Collection();
                             displayImages(images.getItems());
-
-//                            if(images.getItems().get(v.getId()).getData().get(v.getId()).getKeywords().contains(searchEditText.getText().toString()))
-//                            {
-//                                displayImages(images.getItems());
-//
-//                            }
 
                         }));
 

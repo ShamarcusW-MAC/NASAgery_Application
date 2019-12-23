@@ -45,7 +45,11 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
 
     @Override
     public int getItemCount() {
-        return images.size();
+        if(images != null) {
+            return images.size();
+        }else{
+            return 0;
+        }
     }
 
     class ImageViewHolder extends RecyclerView.ViewHolder {
