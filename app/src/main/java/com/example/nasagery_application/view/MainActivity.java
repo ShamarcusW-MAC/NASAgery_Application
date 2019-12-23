@@ -54,7 +54,9 @@ public class MainActivity extends AppCompatActivity {
 
                             {
 
-                                displayImages(images.getCollection().getItems().get(0).getLinks());
+                                for (int i = 0; i < images.getCollection().getItems().size(); i++) {
+                                    displayImages(images.getCollection().getItems().get(i).getLinks());
+                                }
                             }
 
                         }));
