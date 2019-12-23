@@ -1,6 +1,7 @@
 package com.example.nasagery_application.network;
 
 import com.example.nasagery_application.model.Collection;
+import com.example.nasagery_application.model.Image;
 import com.example.nasagery_application.model.Item;
 
 import io.reactivex.Observable;
@@ -11,6 +12,6 @@ public interface NASAService {
 
 
     @GET("/search")
-    Observable<Collection> getImage(@Query("q")String keyword);
+    Observable<Image> getImage(@Query("q")String keyword);
 
 }

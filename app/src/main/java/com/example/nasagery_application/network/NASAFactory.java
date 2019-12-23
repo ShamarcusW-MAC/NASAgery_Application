@@ -1,6 +1,7 @@
 package com.example.nasagery_application.network;
 
 import com.example.nasagery_application.model.Collection;
+import com.example.nasagery_application.model.Image;
 import com.example.nasagery_application.model.Item;
 
 import io.reactivex.Observable;
@@ -26,7 +27,7 @@ public class NASAFactory {
         return retrofit.create(NASAService.class);
     }
 
-    public Observable<Collection> getImage(String url) {
+    public Observable<Image> getImage(String url) {
         return nasaService.getImage(url);
     }
 }
