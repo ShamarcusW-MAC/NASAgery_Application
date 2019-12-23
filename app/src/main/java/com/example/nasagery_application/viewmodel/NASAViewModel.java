@@ -14,7 +14,7 @@ public class NASAViewModel extends ViewModel {
 
     private NASAFactory nasaFactory = new NASAFactory();
 
-    public Observable<Item> getImage(String url) {
+    public Observable<Collection> getImage(String url) {
         return nasaFactory.getImage(url)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());

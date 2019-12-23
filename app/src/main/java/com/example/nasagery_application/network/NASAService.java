@@ -11,6 +11,6 @@ public interface NASAService {
 
 
     @GET("/search")
-    Observable<Item> getImage(@Query("q")String keyword);
+    Observable<Collection> getImage(@Query("q")String keyword);
 
 }

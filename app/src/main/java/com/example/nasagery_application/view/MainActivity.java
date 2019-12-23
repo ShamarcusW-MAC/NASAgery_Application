@@ -17,7 +17,6 @@ import com.example.nasagery_application.model.Collection;
 import com.example.nasagery_application.model.Datum;
 import com.example.nasagery_application.model.Image;
 import com.example.nasagery_application.model.Item;
-import com.example.nasagery_application.model.Link;
 import com.example.nasagery_application.network.NASAFactory;
 import com.example.nasagery_application.network.NASAService;
 import com.example.nasagery_application.viewmodel.NASAViewModel;
@@ -31,7 +30,9 @@ public class MainActivity extends AppCompatActivity {
     private NASAViewModel nasaViewModel;
 
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
-    
+
+    private NASAService nasaService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +53,14 @@ public class MainActivity extends AppCompatActivity {
                 compositeDisposable.add(nasaViewModel.getImage(searchEditText.getText().toString())
                         .subscribe(images -> {
 
-                            displayImages(images.getLinks());
+//                            images = new Collection();
+                            displayImages(images.getItems());
+
+//                            if(images.getItems().get(v.getId()).getData().get(v.getId()).getKeywords().contains(searchEditText.getText().toString()))
+//                            {
+//                                displayImages(images.getItems());
+//
+//                            }
 
                         }));
 
@@ -61,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void displayImages(List<Link> images){
+    private void displayImages(List<Item> images){
         ImageAdapter imageAdapter = new ImageAdapter(this, images);
         RecyclerView recyclerView = findViewById(R.id.image_recyclerview);
         recyclerView.setAdapter(imageAdapter);

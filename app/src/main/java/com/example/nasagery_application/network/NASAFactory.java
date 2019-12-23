@@ -14,10 +14,6 @@ public class NASAFactory {
 
     public NASAService nasaService = createService(retrofitInstance());
 
-//    public void init() {
-//        nasaService = createService(retrofitInstance());
-//    }
-
 
     private Retrofit retrofitInstance(){
         return new Retrofit.Builder().baseUrl(BASE_URL)
@@ -30,7 +26,7 @@ public class NASAFactory {
         return retrofit.create(NASAService.class);
     }
 
-    public Observable<Item> getImage(String url) {
+    public Observable<Collection> getImage(String url) {
         return nasaService.getImage(url);
     }
 }
