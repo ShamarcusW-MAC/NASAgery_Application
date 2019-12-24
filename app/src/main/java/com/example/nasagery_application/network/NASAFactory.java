@@ -1,9 +1,6 @@
 package com.example.nasagery_application.network;
 
-import com.example.nasagery_application.model.Collection;
 import com.example.nasagery_application.model.Image;
-import com.example.nasagery_application.model.Item;
-
 import io.reactivex.Observable;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -12,9 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class NASAFactory {
 
     String BASE_URL = "https://images-api.nasa.gov";
-
     public NASAService nasaService = createService(retrofitInstance());
-
 
     private Retrofit retrofitInstance(){
         return new Retrofit.Builder().baseUrl(BASE_URL)
@@ -28,6 +23,7 @@ public class NASAFactory {
     }
 
     public Observable<Image> getImage(String url) {
+
         return nasaService.getImage(url);
     }
 }

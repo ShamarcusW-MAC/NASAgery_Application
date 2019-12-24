@@ -1,33 +1,24 @@
 package com.example.nasagery_application.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import com.example.nasagery_application.R;
 import com.example.nasagery_application.adapter.ImageAdapter;
-import com.example.nasagery_application.model.Collection;
-import com.example.nasagery_application.model.Datum;
-import com.example.nasagery_application.model.Image;
+import com.example.nasagery_application.databinding.ActivityMainBinding;
 import com.example.nasagery_application.model.Item;
-import com.example.nasagery_application.model.Link;
-import com.example.nasagery_application.network.NASAFactory;
-import com.example.nasagery_application.network.NASAService;
 import com.example.nasagery_application.viewmodel.NASAViewModel;
-
 import java.util.List;
-
 import io.reactivex.disposables.CompositeDisposable;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,24 +30,18 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ImageAdapter imageAdapter;
     TextView noResultTextView;
-//    List<Image> images;
 
+    private ActivityMainBinding activityMainBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
           super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-
+        activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         EditText searchEditText = findViewById(R.id.search_edittext);
-
         Button searchButton = findViewById(R.id.search_button);
-
-
         nasaViewModel = ViewModelProviders.of(this).get(NASAViewModel.class);
-
-
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,10 +51,7 @@ public class MainActivity extends AppCompatActivity {
                         .subscribe(images -> {
 
                             {
-
                                 displayImages(images.getCollection().getItems());
-
-
                             }
 
                         }, throwable -> {
@@ -87,11 +69,9 @@ public class MainActivity extends AppCompatActivity {
                         .subscribe(images -> {
 
                             {
-
                                 displayImages(images.getCollection().getItems());
                                 imageAdapter.notifyDataSetChanged();
                                 swipeRefreshLayout.setRefreshing(false);
-
                             }
 
                         }, throwable -> {
