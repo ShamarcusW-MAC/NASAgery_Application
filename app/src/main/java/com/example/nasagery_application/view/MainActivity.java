@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private NASAViewModel nasaViewModel;
 
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private final int add = 10;
 
     SwipeRefreshLayout swipeRefreshLayout;
     RecyclerView recyclerView;
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
                             {
                                 displayImages(images.getCollection().getItems());
                                 imageAdapter.notifyDataSetChanged();
+                                imageAdapter.limit += add;
                                 swipeRefreshLayout.setRefreshing(false);
                             }
 

@@ -14,9 +14,10 @@ import java.util.List;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder> {
 
+
     private Context context;
     private List<Item> images;
-    private final int limit = 20;
+    public int limit = 20;
 
 
     public ImageAdapter(Context context, List<Item> images){
