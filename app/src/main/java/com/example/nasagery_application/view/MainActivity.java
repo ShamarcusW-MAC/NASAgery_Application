@@ -60,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
 //                                }
                             }
 
+                        }, throwable -> {
+                            Log.d("TAG_ERROR", throwable.getMessage());
                         }));
 
             }
