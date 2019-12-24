@@ -1,6 +1,7 @@
 package com.example.nasagery_application.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,8 +41,10 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
     public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
 
         Glide.with(holder.itemView.getContext())
-                .load(images.get(position).getLinks().get(0))
+                .load(images.get(position).getLinks().get(0).getHref())
                 .into(holder.nasaImageView);
+
+        Log.d("Link", images.get(position).getLinks().get(0).getHref());
     }
 
     @Override

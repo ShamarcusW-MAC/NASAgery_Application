@@ -55,9 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
                             {
 
-//                                for (int i = 0; i < images.getCollection().getItems().size(); i++) {
                                     displayImages(images.getCollection().getItems());
-//                                }
                             }
 
                         }, throwable -> {
