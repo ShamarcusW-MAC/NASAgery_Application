@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.nasagery_application.R;
 import com.example.nasagery_application.adapter.ImageAdapter;
@@ -37,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
     SwipeRefreshLayout swipeRefreshLayout;
     RecyclerView recyclerView;
     ImageAdapter imageAdapter;
-    List<Image> images;
+    TextView noResultTextView;
+//    List<Image> images;
 
 
     @Override
@@ -103,9 +105,20 @@ public class MainActivity extends AppCompatActivity {
     private void displayImages(List<Item> images){
         imageAdapter = new ImageAdapter(this, images);
         recyclerView = findViewById(R.id.image_recyclerview);
-        recyclerView.setAdapter(imageAdapter);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(linearLayoutManager);
+        noResultTextView = findViewById(R.id.noresults_textview);
+        if(images.isEmpty()){
+            recyclerView.setVisibility(View.GONE);
+            noResultTextView.setVisibility(View.VISIBLE);
+
+        }else {
+            noResultTextView.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+            recyclerView.setAdapter(imageAdapter);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+            recyclerView.setLayoutManager(linearLayoutManager);
+
+        }
+
     }
 
 }
