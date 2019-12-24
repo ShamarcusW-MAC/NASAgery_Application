@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -33,14 +34,23 @@ public class MainActivity extends AppCompatActivity {
 
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
+    SwipeRefreshLayout swipeRefreshLayout;
+    RecyclerView recyclerView;
+    ImageAdapter imageAdapter;
+    List<Image> images;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
           super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
         EditText searchEditText = findViewById(R.id.search_edittext);
 
         Button searchButton = findViewById(R.id.search_button);
+
 
         nasaViewModel = ViewModelProviders.of(this).get(NASAViewModel.class);
 
@@ -55,7 +65,9 @@ public class MainActivity extends AppCompatActivity {
 
                             {
 
-                                    displayImages(images.getCollection().getItems());
+                                displayImages(images.getCollection().getItems());
+
+
                             }
 
                         }, throwable -> {
@@ -65,13 +77,35 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        swipeRefreshLayout = findViewById(R.id.swipe_recyclerview);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                compositeDisposable.add(nasaViewModel.getImage(searchEditText.getText().toString())
+                        .subscribe(images -> {
+
+                            {
+
+                                displayImages(images.getCollection().getItems());
+                                imageAdapter.notifyDataSetChanged();
+                                swipeRefreshLayout.setRefreshing(false);
+
+                            }
+
+                        }, throwable -> {
+                            Log.d("TAG_ERROR", throwable.getMessage());
+                        }));
+            }
+        });
+
     }
 
     private void displayImages(List<Item> images){
-        ImageAdapter imageAdapter = new ImageAdapter(this, images);
-        RecyclerView recyclerView = findViewById(R.id.image_recyclerview);
+        imageAdapter = new ImageAdapter(this, images);
+        recyclerView = findViewById(R.id.image_recyclerview);
         recyclerView.setAdapter(imageAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
     }
+
 }

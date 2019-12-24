@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
+    android:background="#A4000000"
     tools:context=".view.MainActivity">
 
     <TextView
@@ -46,16 +46,25 @@
         app:layout_constraintBottom_toBottomOf="@id/search_edittext"
         />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/image_recyclerview"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="32dp"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="70dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/search_edittext"
-        app:layout_constraintBottom_toBottomOf="parent"
 
-        />
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/image_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            />
+
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
