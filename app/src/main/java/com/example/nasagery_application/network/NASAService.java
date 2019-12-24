@@ -11,7 +11,7 @@ import retrofit2.http.Query;
 public interface NASAService {
 
 
-    @GET("/search")
+    @GET("/search?media_type=image&q")
     Observable<Image> getImage(@Query("q")String keyword);
 
 }

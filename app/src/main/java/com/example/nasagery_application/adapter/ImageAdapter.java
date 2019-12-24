@@ -19,9 +19,9 @@ import java.util.List;
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder> {
 
     private Context context;
-    private List<Link> images;
+    private List<Item> images;
 
-    public ImageAdapter(Context context, List<Link> images){
+    public ImageAdapter(Context context, List<Item> images){
 
         this.context = context;
         this.images = images;
@@ -40,7 +40,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
     public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
 
         Glide.with(holder.itemView.getContext())
-                .load(images.get(position).getHref())
+                .load(images.get(position).getLinks().get(0))
                 .into(holder.nasaImageView);
     }
 

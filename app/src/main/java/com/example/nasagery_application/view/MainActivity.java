@@ -25,6 +25,7 @@ import com.example.nasagery_application.viewmodel.NASAViewModel;
 import java.util.List;
 
 import io.reactivex.disposables.CompositeDisposable;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+          super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         EditText searchEditText = findViewById(R.id.search_edittext);
@@ -54,9 +55,9 @@ public class MainActivity extends AppCompatActivity {
 
                             {
 
-                                for (int i = 0; i < images.getCollection().getItems().size(); i++) {
-                                    displayImages(images.getCollection().getItems().get(i).getLinks());
-                                }
+//                                for (int i = 0; i < images.getCollection().getItems().size(); i++) {
+                                    displayImages(images.getCollection().getItems());
+//                                }
                             }
 
                         }));
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void displayImages(List<Link> images){
+    private void displayImages(List<Item> images){
         ImageAdapter imageAdapter = new ImageAdapter(this, images);
         RecyclerView recyclerView = findViewById(R.id.image_recyclerview);
         recyclerView.setAdapter(imageAdapter);
