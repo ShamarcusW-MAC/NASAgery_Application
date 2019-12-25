@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.nasagery_application.R;
 import com.example.nasagery_application.adapter.ImageAdapter;
 import com.example.nasagery_application.databinding.ActivityMainBinding;
@@ -74,11 +76,16 @@ public class MainActivity extends AppCompatActivity {
                                 imageAdapter.notifyDataSetChanged();
                                 imageAdapter.limit += add;
                                 swipeRefreshLayout.setRefreshing(false);
+                                Toast.makeText(MainActivity.this, "Number of photos: " + imageAdapter.getItemCount(), Toast.LENGTH_SHORT).show();
                             }
 
                         }, throwable -> {
                             Log.d("TAG_ERROR", throwable.getMessage());
-                        }));
+                        }
+
+                        )
+
+                );
             }
         });
 
