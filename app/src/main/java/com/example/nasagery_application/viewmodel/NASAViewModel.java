@@ -1,8 +1,4 @@
 package com.example.nasagery_application.viewmodel;
-
-import android.os.Handler;
-import android.view.KeyEvent;
-
 import androidx.lifecycle.ViewModel;
 import com.example.nasagery_application.model.Image;
 import com.example.nasagery_application.network.NASAFactory;
@@ -14,22 +10,9 @@ public class NASAViewModel extends ViewModel {
 
     private NASAFactory nasaFactory = new NASAFactory();
 
-    private MyCallback callback;
-
     public Observable<Image> getImage(String url) {
         return nasaFactory.getImage(url)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
-    }
-
-    public void onClick(MyCallback callback) {
-
-    }
-
-
-
-    public interface MyCallback{
-        void succeed();
-        void failed();
     }
 }

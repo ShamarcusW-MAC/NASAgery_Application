@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private NASAViewModel nasaViewModel;
 
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
-    private final int add = 10;
+    private int add = 10;
 
     SwipeRefreshLayout swipeRefreshLayout;
     RecyclerView recyclerView;
@@ -74,7 +74,8 @@ public class MainActivity extends AppCompatActivity {
                             {
                                 displayImages(images.getCollection().getItems());
                                 imageAdapter.notifyDataSetChanged();
-                                imageAdapter.limit += add;
+                                imageAdapter.limit = add;
+                                add += 20;
                                 swipeRefreshLayout.setRefreshing(false);
                                 Toast.makeText(MainActivity.this, "Number of photos: " + imageAdapter.getItemCount(), Toast.LENGTH_SHORT).show();
                             }
