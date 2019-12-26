@@ -2,6 +2,7 @@ package com.example.nasagery_application.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,9 +18,11 @@ import android.widget.Toast;
 import com.example.nasagery_application.R;
 import com.example.nasagery_application.adapter.ImageAdapter;
 import com.example.nasagery_application.databinding.ActivityMainBinding;
+import com.example.nasagery_application.model.Image;
 import com.example.nasagery_application.model.Item;
 import com.example.nasagery_application.viewmodel.NASAViewModel;
 import java.util.List;
+
 import io.reactivex.disposables.CompositeDisposable;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private NASAViewModel nasaViewModel;
 
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
-    private int add = 10;
+    private int add = 20;
 
     SwipeRefreshLayout swipeRefreshLayout;
     RecyclerView recyclerView;
@@ -45,21 +48,21 @@ public class MainActivity extends AppCompatActivity {
         EditText searchEditText = findViewById(R.id.search_edittext);
         Button searchButton = findViewById(R.id.search_button);
         nasaViewModel = ViewModelProviders.of(this).get(NASAViewModel.class);
+        activityMainBinding.setViewModel(nasaViewModel);
 
+        nasaViewModel.image.observe(this, new Observer<Image>() {
+            @Override
+            public void onChanged(Image image) {
+
+                displayImages(image.getCollection().getItems());
+
+            }
+        });
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                compositeDisposable.add(nasaViewModel.getImage(searchEditText.getText().toString())
-                        .subscribe(images -> {
-
-                            {
-                                displayImages(images.getCollection().getItems());
-                            }
-
-                        }, throwable -> {
-                            Log.d("TAG_ERROR", throwable.getMessage());
-                        }));
+                nasaViewModel.makeCall(searchEditText.getText().toString());
 
             }
         });

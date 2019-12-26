@@ -1,11 +1,12 @@
 
 package com.example.nasagery_application.model;
 
+import java.io.Serializable;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Item {
+public class Item implements Serializable {
 
     @SerializedName("data")
     @Expose

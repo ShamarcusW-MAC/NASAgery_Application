@@ -8,6 +8,9 @@
         <variable
             name="image"
             type="com.example.nasagery_application.model.Image" />
+        <variable
+            name="viewModel"
+            type="com.example.nasagery_application.viewmodel.NASAViewModel" />
         
     </data>
     
@@ -57,6 +60,7 @@
             app:layout_constraintTop_toTopOf="@id/search_edittext"
             app:layout_constraintBottom_toBottomOf="@id/search_edittext"
             />
+
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipe_recyclerview"
