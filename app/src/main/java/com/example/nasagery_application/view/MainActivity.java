@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
 import com.example.nasagery_application.R;
 import com.example.nasagery_application.adapter.ImageAdapter;
 import com.example.nasagery_application.databinding.ActivityMainBinding;
@@ -19,7 +18,6 @@ import com.example.nasagery_application.model.Image;
 import com.example.nasagery_application.model.Item;
 import com.example.nasagery_application.viewmodel.NASAViewModel;
 import java.util.List;
-
 import io.reactivex.disposables.CompositeDisposable;
 
 public class MainActivity extends AppCompatActivity {
